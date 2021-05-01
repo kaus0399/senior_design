@@ -1,6 +1,6 @@
 # Git started
 
-<h4><b> A walkthrough of the Plant AI and Biophysics Lab's git workflow. </b></h4>
+<h4><b> A walkthrough of our team's git workflow. </b></h4>
 
 ## Motivation
 
