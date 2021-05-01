@@ -11,13 +11,13 @@ class Microphone(object):
         # print(self.status)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin, GPIO.IN)
+        timer = self.time
         
-        while True:
-            if GPIO.input(10):
-                print('Noisy')
+        while timer > 0
+            if GPIO.input(self.pin):
+                #Process output and then save Audio to SD card as date_time_self.name.wav
             else:
-                print('Quiet')
-            time.sleep(0.1)
+                raise Exception('Audio not recording')
 
 
     # def print_time(self):
