@@ -54,10 +54,10 @@ Examine the active branch and the other branches that are tracked locally.
 $ git branch
 ```
 
-2. Change into the `git-started` repo directory and checkout the existing `dev` branch from the remote.
+2. Change into the `git-SOP` repo directory and checkout the existing `dev` branch from the remote.
 
 ```bash
-$ cd git-started
+$ cd git-SOP
 $ git checkout dev
 ```
 
