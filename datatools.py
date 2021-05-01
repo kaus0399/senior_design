@@ -1,19 +1,34 @@
 # import gpiozero
 
 class Microphone(object):
-    def __init__(self, time, status):
+    def __init__(self, time: int, lc: int, hc: int, pin: int, status = False):
         self.time = time
+        self.pin = pin
         self.status = status
 
-    def print_time(self):
-        print(self.time)
-        print(self.status)
+    def record(self):
+        # print(self.pin)
+        # print(self.status)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.IN)
+        
+        while True:
+            if GPIO.input(10):
+                print('Noisy')
+            else:
+                print('Quiet')
+            time.sleep(0.1)
 
 
-class Button(object):
-    def __init__(self, status):
-        self.time = time
-        self.status = False
+    # def print_time(self):
+    #     print(self.time)
+    #     print(self.status)
+
+
+# class Button(object):
+#     def __init__(self, status):
+#         self.time = time
+#         self.status = False
 
 
 
