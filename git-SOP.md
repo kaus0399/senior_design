@@ -45,7 +45,7 @@ As an example, let's say that I want to develop a new software feature, called `
 1. Clone the repo, which starts as the `main` branch.
 
 ```bash
-$ git clone https://github.com/plant-ai-biophysics-lab/git-started.git
+$ git clone https://github.com/kaus0399/senior_design.git
 ```
 
 Examine the active branch and the other branches that are tracked locally.
