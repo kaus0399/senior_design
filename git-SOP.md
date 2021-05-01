@@ -140,15 +140,3 @@ $ git push origin --delete our_basic_workflow
 ```
 
 12. Start again at step (3) with a new `<feature_branch>`.
-
-
-## Advanced workflow and functions
-
-### Squash and rebase
-
-Coming soon!
-
-### Merge conflicts
-
-Coming soon!
-
