@@ -41,7 +41,7 @@ class Microphone(object):
                 scipy.io.wavfile.write(self.time.wav, )
                 #Process output and then save Audio to SD card as date_time_self.name.wav
             else:
-                raise Exception('Audio not recording')
+                raise Exception('Audio not recording' + str(self.name))
 
 
 
