@@ -18,3 +18,11 @@ aortic_valve = Microphone(time=30, lc=60, hc=1200, pin=8)
 
 
 upper_left_lung.record()
+lower_right_lung.record()
+upper_left_lung.record()
+lower_left_lung.record()
+mitrial_valve.record()
+tricuspid_valve.record()
+pulmonary_valve.record()
+aortic_valve.record()
+

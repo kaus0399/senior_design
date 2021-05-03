@@ -17,7 +17,7 @@ class Microphone(object):
             if GPIO.input(self.pin):
                 #Process output and then save Audio to SD card as date_time_self.name.wav
             else:
-                raise Exception('Audio not recording')
+                raise Exception('Audio not recording' + str(self.name))
 
 
     # def print_time(self):
