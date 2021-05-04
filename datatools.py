@@ -1,18 +1,21 @@
 from gpiozero import LED, Button
 from scipy.signal import butter, lfilter
+from scipy.io.wavfile import write
 import time
 import RPi.GPIO as GPIO
+import sounddevice as sd
 
 
 class Microphone(object):
-    def __init__(self, time: int, lc: int, hc: int, fs: int, order: int, pin: int, status=False):
+    def __init__(self, name: str, time: int, lc: int, hc: int, fs: int, order: int, pin: int, status=False):
         self.time = time
         self.pin = pin
         self.status = status
+        self.name = name
 
     # rate at which analog converts to digital
 
-    def butter_bandpass(self, lc, hc, fs, order):
+    def butter_bandpass(self, lc: int, hc: int, fs: int, order: int):
         # lc, hc, fs, order=5
         nyq = 0.5 * self.fs
         low = self.lc / nyq
@@ -26,36 +29,25 @@ class Microphone(object):
         y = lfilter(b, a, data)
         return y
 
-    async def record(self):
-        # print(self.pin)
-        # print(self.status)
-        print("record")
+    def record(self, button):
+        GPIO.setwarnings(False) # Set Warnings to False
+        GPIO.setmode(GPIO.BCM) # Set Pin-Mode
+        micro_pin = GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Set Pin for microphone
+        myrecording = sd.rec(int(self.time * self.fs), samplerate=self.fs, channels=2) #Recording
+        sd.wait()
+        write(self.name, samplerate, myrecording)  # Save as WAV file 
 
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.pin, GPIO.IN)
-        timer = self.time
 
-        led = LED(17) #LED PIN
-        button = Button(2) #BUTTON PIN
+    def filter(self):
+        return None
+        
+            #     # b, a = signal.butter(4, 100, 'low', analog=True)
+            #     # w, h = signal.freqs(b, a)
+            #     #scipy.io.wavfile.write(self.time.wav, )
 
-        while timer > 0:
-            if button.is_pressed:
-                print("LED on")
-                led.on()
-            else:
-                print("LED off")
-                led.off()
-
-            if GPIO.input(self.pin):
-                print("h")
-
-                # b, a = signal.butter(4, 100, 'low', analog=True)
-                # w, h = signal.freqs(b, a)
-                #scipy.io.wavfile.write(self.time.wav, )
-
-                # Process output and then save Audio to SD card as date_time_self.name.wav
-            else:
-                raise Exception('Audio not recording' + str(self.name))
+            #     # Process output and then save Audio to SD card as date_time_self.name.wav
+            # else:
+            #     raise Exception('Audio not recording' + str(self.name))
 
 
     # T = 0.05
