@@ -35,7 +35,7 @@ class Microphone(object):
         micro_pin = GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Set Pin for microphone
         myrecording = sd.rec(int(self.time * self.fs), samplerate=self.fs, channels=2) #Recording
         sd.wait()
-        write(self.name, self.fs, myrecording)  # Save as WAV file 
+        write(self.name, samplerate, myrecording)  # Save as WAV file 
 
 
     def filter(self):
