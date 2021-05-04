@@ -1,16 +1,19 @@
-# import gpiozero
+from gpiozero import LED, Button
 from scipy.signal import butter, lfilter
+import time
+import RPi.GPIO as GPIO
+
 
 class Microphone(object):
-    def __init__(self, time: int, lc: int, hc: int, fs: int, order: int,  pin: int, status = False):
+    def __init__(self, time: int, lc: int, hc: int, fs: int, order: int, pin: int, status=False):
         self.time = time
         self.pin = pin
         self.status = status
 
-#rate at which analog converts to digital
+    # rate at which analog converts to digital
 
     def butter_bandpass(self, lc, hc, fs, order):
-        #lc, hc, fs, order=5
+        # lc, hc, fs, order=5
         nyq = 0.5 * self.fs
         low = self.lc / nyq
         high = self.hc / nyq
@@ -18,7 +21,7 @@ class Microphone(object):
         return b, a
 
     def butter_bandpass_filter(self):
-        #data, lc, hc, fs, order=5
+        # data, lc, hc, fs, order=5
         b, a = self.butter_bandpass(self.lc, self.hc, self.fs, order=self.order)
         y = lfilter(b, a, data)
         return y
@@ -27,22 +30,35 @@ class Microphone(object):
         # print(self.pin)
         # print(self.status)
         print("record")
-        return
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin, GPIO.IN)
         timer = self.time
-        
+
+        led = LED(17) #LED PIN
+        button = Button(2) #BUTTON PIN
+
         while timer > 0:
+            if button.is_pressed:
+                print("LED on")
+                led.on()
+            else:
+                print("LED off")
+                led.off()
+
             if GPIO.input(self.pin):
+                print("h")
+
                 # b, a = signal.butter(4, 100, 'low', analog=True)
                 # w, h = signal.freqs(b, a)
+                #scipy.io.wavfile.write(self.time.wav, )
 
-                scipy.io.wavfile.write(self.time.wav, )
-                #Process output and then save Audio to SD card as date_time_self.name.wav
+                # Process output and then save Audio to SD card as date_time_self.name.wav
             else:
-                raise Exception('Audio not recording')
-
+                raise Exception('Audio not recording' + str(self.name))
+            time.sleep(1)
+            timer -= 1
+            print(timer)
 
 
     # T = 0.05
@@ -60,12 +76,9 @@ class Microphone(object):
     #
     # y = butter_bandpass_filter(x, lowcut, highcut, fs, order=6)
 
-
-
     # def print_time(self):
     #     print(self.time)
     #     print(self.status)
-
 
 # class Button(object):
 #     def __init__(self, status):
@@ -73,28 +86,22 @@ class Microphone(object):
 #         self.status = False
 
 
-
 # #Object : Microphone
-# Time 
+# Time
 # Frequency (lc,hc)
-# Measurement 
+# Measurement
 # Processsing
 # Status: False
 # if TImer == 0 .. set True
 
 
-# #Button Object 
+# #Button Object
 # Boolean (Button) True or False
 # Track status of boolean
 
 
 # While at least one microphone False:
-#     Keep going 
+#     Keep going
 
 # If all microphones True:
-#     terminate 
-
-
-
-
-
+#     terminate
