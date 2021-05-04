@@ -38,7 +38,8 @@ class Microphone(object):
         write(self.name, self.fs, myrecording)  # Save as WAV file 
 
 
-    def filter(self)
+    def filter(self):
+        return None
         
             #     # b, a = signal.butter(4, 100, 'low', analog=True)
             #     # w, h = signal.freqs(b, a)
