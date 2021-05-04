@@ -56,9 +56,6 @@ class Microphone(object):
                 # Process output and then save Audio to SD card as date_time_self.name.wav
             else:
                 raise Exception('Audio not recording' + str(self.name))
-            time.sleep(1)
-            timer -= 1
-            print(timer)
 
 
     # T = 0.05
