@@ -8,6 +8,7 @@ import asyncio
 # while True:
 #     if GPIO.input(10) == GPIO.HIGH:
         #instantiate microphones
+
 upper_right_lung = Microphone(time=30, lc=60, hc=1200, pin=1, fs=1000, order=5)
 lower_right_lung = Microphone(time=30, lc=60, hc=1200, pin=2, fs=1000, order=5)
 upper_left_lung = Microphone(time=30, lc=60, hc=1200, pin=3, fs=1000, order=5)
@@ -16,7 +17,6 @@ mitrial_valve = Microphone(time=30, lc=20, hc=500, pin=5, fs=1000, order=5)
 tricuspid_valve = Microphone(time=30, lc=20, hc=500, pin=6, fs=1000, order=5)
 pulmonary_valve = Microphone(time=30, lc=20, hc=500, pin=7, fs=1000, order=5)
 aortic_valve = Microphone(time=30, lc=20, hc=500, pin=8, fs=1000, order=5)
-
 
 
 async def main():
